@@ -37,6 +37,9 @@ dependencies {
 
     implementation 'io.lettuce.core:lettuce-core' // 기본 클라이언트
     implementation 'org.redisson:redisson-spring-boot-starter:3.23.1'
+
+
+    implementation 'com.google.guava:guava:32.0.1-jre'
 }
 
 tasks.named('test') {
