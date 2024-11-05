@@ -55,4 +55,10 @@ public class PriorityQueueService {
     public Set<String> getAllUsers() {
         return redisTemplate.opsForZSet().range(QUEUE_KEY, 0, -1);
     }
+
+    // 사용자의 대기 순번 확인
+    public int getUserPosition(String userId) {
+        Long rank = redisTemplate.opsForZSet().rank(QUEUE_KEY, userId);
+        return rank != null ? rank.intValue() + 1 : -1; // 순번을 1부터 시작하도록 반환
+    }
 }
