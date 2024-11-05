@@ -4,6 +4,7 @@ import com.example.redis.controller.dto.UserPriorityDTO;
 import com.example.redis.service.PriorityQueueService;
 import com.google.common.util.concurrent.AtomicDouble;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class PriorityQueueController {
 
     private final PriorityQueueService queueService;
-    private final AtomicDouble userPriority = new AtomicDouble(0.0);
+    private final StringRedisTemplate redisTemplate;
+    private static final String PRIORITY_KEY = "userPriority";
 
     // 사용자 대기열에 추가 (우선순위 점수와 함께)
     @PostMapping("/login")
@@ -37,9 +39,7 @@ public class PriorityQueueController {
 
     // 우선순위 점수 계산 로직
     private double calculatePriorityScore() {
-        double currentScore = userPriority.get();
-        double newScore = currentScore + 1.0;
-        userPriority.set(newScore);
-        return newScore;
+        Long score = redisTemplate.opsForValue().increment(PRIORITY_KEY);
+        return score != null ? score.doubleValue() : 0.0;
     }
 }
