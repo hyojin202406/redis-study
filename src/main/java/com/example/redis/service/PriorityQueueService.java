@@ -61,4 +61,10 @@ public class PriorityQueueService {
         Long rank = redisTemplate.opsForZSet().rank(QUEUE_KEY, userId);
         return rank != null ? rank.intValue() + 1 : -1; // 순번을 1부터 시작하도록 반환
     }
+
+    // 활성 사용자 대기열에 유저가 존재하는지 확인
+    public boolean isUserActive(String userId) {
+        // ACTIVE_QUEUE_KEY 리스트의 모든 값을 조회하여 해당 userId가 포함되어 있는지 확인
+        return redisTemplate.opsForList().range(ACTIVE_QUEUE_KEY, 0, -1).contains(userId);
+    }
 }
