@@ -20,7 +20,8 @@ Sorted Set은 각 항목에 score를 부여해 자동으로 정렬되므로, 대
 ## 대기열 서비스 구현
 
 ---
-
+- [REST_API](docs/REST_API.md)
+- [Sequence_Diagram](docs/Sequence_Diagram.md)
 ### 시나리오
 - 사용자가 접속할 때마다 해당 사용자를 저장합니다
 - 스케줄러를 통해 10명씩 활성 유저 대기열에 넣습니다 
