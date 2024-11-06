@@ -1,3 +1,8 @@
+# Sequence Diagram
+## 대기열 시스템 설계
+
+--- 
+
 ``` mermaid
 sequenceDiagram
     participant User as 사용자
