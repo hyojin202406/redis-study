@@ -1,0 +1,22 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 6000
+  jackson:
+    serialization:
+      indent_output: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG  # Spring 로그 디버그 레벨 설정
+    com.example.redis: DEBUG    # 테스트 애플리케이션의 로그 레벨 설정
+
+testcontainers:
+  reuse: true # Testcontainers 재사용 활성화
